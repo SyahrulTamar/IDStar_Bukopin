@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/IDStar_Bukopin/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500&display=swap"
+        rel="stylesheet">
+    <title>Index-Burger King</title>
+</head>
+
+<body>
+    <div class="header-block">
+        <div class="header-background">
+            <div class="header-wrapper">
+                <div class="website">
+                    <a href="#" class="logo">
+                        <img src="/IDStar_Bukopin/img/logo-web.png" alt="logoWeb">
+                    </a>
+                    <div class="left-navigation">
+                        <div class="group-title">
+                            <a href="#">
+                                <span class="subtitle">Delivery</span>
+                                <span class="title">Order</span>
+                            </a>
+                        </div>
+                        <div class="group-title">
+                            <a href="#">
+                                <span class="subtitle">Get Fresh</span>
+                                <span class="title">Promotions</span>
+                            </a>
+                        </div>
+                        <div class="group-title">
+                            <a href="#">
+                                <span class="subtitle">Exclusive</span>
+                                <span class="title">Large Order</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="right-navigation">
+                        <div class="group">
+                            <div class="login"><a href="#">LOGIN</a></div>
+                        </div>
+                        <div class="cart-block">
+                            <a href="#" id="cart" class="cart">
+                                <span id="badge" class="badge red ">0</span>
+                                <img src="/IDStar_Bukopin/img/cart.png">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slider-block">
+        <div id="slider-container">
+        </div>
+        <div class="slider-nav">
+            <button onclick="prevSlide()">&#10094;</button>
+            <button onclick="nextSlide()">&#10095;</button>
+        </div>
+    </div>
+    <div class="content-block">
+        <div class="content-wrapper">
+            <h2>Our Menus</h2>
+            <div class="three-block-menu">
+            </div>
+        </div>
+    </div>
+    <div class="footer-block">
+        <div class="footer-wrapper">
+            <div class="information">
+                <div class="footer-left">
+                    <div class="title">BURGER KING® DELIVERY</div>
+                    <div class="phone">
+                        <a href="tel:1500025">
+                            <img src="/IDStar_Bukopin/img/footer-phone.png">
+                            15000 25
+                        </a>
+
+                        <a href="#" class="email-footer">
+                            <img src="/IDStar_Bukopin/img/footer-mail.png">
+                            <span>guestservice@burgerking.co.id</span>
+                        </a>
+
+                        <span class="social-media">
+                            <a href="#" target="_blank">
+                                <img src="/IDStar_Bukopin/img/footer-facebook.png">
+                            </a>
+                            <a href="#" target="_blank">
+                                <img src="/IDStar_Bukopin/img/footer-insta.png">
+                            </a>
+                            <a href="#" target="_blank">
+                                <img src="/IDStar_Bukopin/img/footer-twitter.png">
+                            </a>
+                            <a href="#" target="_blank">
+                                <img src="/IDStar_Bukopin/img/footer-youtube.png">
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="footer-right">
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="terms-conditions">
+                <span class="right-line"><a href="#">About Us</a></span>
+                <span class="right-line"><a href="#">Kebijakan Privasi</a></span>
+                <span class="right-line"><a href="#">Syarat dan Ketentuan</a></span>
+                <span class="copyright">TM &amp; © 2024 Burger King Corporation. Used Under License. All rights
+                    reserved.</span>
+            </div>
+        </div>
+    </div>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h4 id="title-order"></h4>
+            <p>Menu ditambahkan ke cart</p>
+        </div>
+    </div>
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        var menuItems = [
+            { imgSrc: '/IDStar_Bukopin/img/image-menu-sample.jpg', title: 'BK APP EXCLUSIVE' },
+            { imgSrc: '/IDStar_Bukopin/img/image-menu-sample.jpg', title: 'Promo Hari Ini' },
+            { imgSrc: '/IDStar_Bukopin/img/image-menu-sample.jpg', title: 'NEW! Cheese Dunk [Limited Time Offer]' },
+            { imgSrc: '/IDStar_Bukopin/img/image-menu-sample.jpg', title: 'NEW! Cheese Dunk [Limited Time Offer]' },
+            { imgSrc: '', title: 'Coola' }
+        ];
+        var cartCount = 0;
+
+        function createMenuItems() {
+            var menuContainer = $('.three-block-menu');
+            for (var i = 0; i < menuItems.length; i++) {
+                var menuItem = menuItems[i];
+                var menuHtml = '<div class="menu-box">' +
+                    '<a href="#">' +
+                    '<div class="img-wrapper">' +
+                    '<img src="' + menuItem.imgSrc + '" />' +
+                    '</div>' +
+                    '<div class="book-wrapper">' +
+                    '<h3>' + menuItem.title + '</h3>' +
+                    '<button onclick="orderMenu(\'' + menuItem.title + '\')">Order</button>' +
+                    '</div>' +
+                    '</a>' +
+                    '</div>';
+
+                menuContainer.append(menuHtml);
+            }
+        }
+
+        function orderMenu(menuTitle) {
+            cartCount++;
+            $('#badge').text(cartCount);
+            showPopup(menuTitle);
+        }
+
+        function showPopup(menuTitle) {
+            $('#popup').fadeIn();
+            $('#title-order').text(menuTitle);
+            $('.close-popup').on('click', function () {
+                $('#popup').fadeOut();
+            });
+            $(document).on('mouseup', function (e) {
+                var popupContent = $('.popup-content');
+                if (!popupContent.is(e.target) && popupContent.has(e.target).length === 0) {
+                    $('#popup').fadeOut();
+                }
+            });
+        }
+        $(document).ready(function () {
+            createMenuItems();
+
+            var slides = [
+                { src: '/IDStar_Bukopin/img/banner-dummie.jpg', alt: 'Slide 1' },
+                { src: '/IDStar_Bukopin/img/banner-dummie.jpg', alt: 'Slide 2' },
+            ];
+
+            function createSlides() {
+                var slideContainer = $('#slider-container');
+                for (var i = 0; i < slides.length; i++) {
+                    var slide = slides[i];
+                    var slideHtml = '<img src="' + slide.src + '" alt="' + slide.alt + '"/>';
+                    slideContainer.append(slideHtml);
+                }
+            }
+
+            createSlides();
+
+            var currentIndex = 0;
+
+            window.nextSlide = function () {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0;
+                }
+                updateSlider();
+            }
+
+            window.prevSlide = function () {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = slides.length - 1;
+                }
+                updateSlider();
+            }
+
+            function updateSlider() {
+                var transformValue = -currentIndex * 98.6 + 'vw';
+                $('#slider-container').css('transform', 'translateX(' + transformValue + ')');
+            }
+        });
+    </script>
+</body>
+
+</html>
